@@ -1,0 +1,35 @@
+Scenario to test functions (not exhaustive) :
+
+python main.py -h -> get helper
+
+python main.py --create_passenger "matthieu bidanel" -> create a passenger
+python main.py --create_passenger "adrien lecornec" "rené louis" -> create multiple passengers
+
+python main.py --create_flight FR092110 10 3 -> create flight with plane dimensions
+python main.py --create_plane UK091120 A380 -> create plane with a given model (see JSON file)
+
+python main.py --allocate_seat FR092110 A0 "matthieu bidanel" -> allocate seat to a passenger
+python main.py --allocate_seat FR092110 B0 "adrien lecornec" C0 "rené louis" -> allocate seat to several passengers
+
+python main.py --allocate_seat UK091120 A11 "adrien lecornec" B11 "rené louis" C11 "matthieu bidanel"
+python main.py --change_seat UK091120 A0 "adrien lecornec" B0 "rené louis" C0 "matthieu bidanel"
+
+
+python main.py --create_passenger "max verstappen"
+python main.py --allocate_seat UK091120 A0 -> should not allocate seat as A0 is already taken by adrien lecornec
+python main.py --allocate_seat UK091120 A1
+python main.py --change_seat UK091120 A0 "max verstappen" -> should not change seat as A0 is already taken by adrien lecornec
+python main.py --change_seat UK091120 A2 "max verstappen"
+python main.py --allocate_seat UK091120 B2 "max verstappen" -> should not allocate seat as max verstappen already has a seat in this plane (use --change_seat)
+
+python main.py --show all
+
+python main.py --show planes -> show planes dataframe
+python main.py --show planes FR092110 -> filter on one flight number
+python main.py --show planes FR092110 UK091120 -> filter on several flight numbers
+
+python main.py --show passengers -> show passengers dataframe
+python main.py --show passengers "matthieu bidanel" -> filter on one passenger
+python main.py --show passengers "matthieu bidanel" "max verstappen" -> filter on several passengers
+
+python main.py --show reservations UK091120 "matthieu bidanel" "max verstappen" -> show one or several reservations in a flight
